@@ -2,7 +2,7 @@
 
 Este é um projeto de front-end desenvolvido em React para consumir a API da Pizzaria Demo. Ele permite gerenciar o cardápio de uma pizzaria, incluindo funcionalidades de listagem, visualização, criação, edição e remoção de itens.
 
-## Tecnologias Utilizadas
+## ✨ Tecnologias Utilizadas
 
 - **React:** Biblioteca para construção da interface de usuário.
 - **Vite:** Ferramenta de build para desenvolvimento rápido.
@@ -10,22 +10,22 @@ Este é um projeto de front-end desenvolvido em React para consumir a API da Piz
 - **Axios:** Cliente HTTP para realizar as chamadas à API.
 - **React Router:** Para gerenciamento de rotas na aplicação.
 
-## Funcionalidades
+## 🚀 Funcionalidades
 
-- [x] Listagem de todos os itens do cardápio.
-- [x] Adição de novos itens ao cardápio.
-- [x] Edição de informações de itens existentes.
-- [x] Remoção de itens do cardápio.
+- [x] Listagem de itens do cardápio em formato de card.
+- [x] Adição e edição de itens em um modal interativo.
+- [x] Remoção de itens com modal de confirmação.
+- [x] Visualização de ingredientes da pizza em um modal separado.
 - [x] Interface responsiva e amigável.
-- [x] Feedback de carregamento e mensagens de erro.
+- [x] Feedback de carregamento e mensagens de sucesso/erro (Snackbar).
 
-## Instalação e Execução
+## 📦 Instalação e Execução
 
 Siga os passos abaixo para rodar o projeto localmente:
 
-1.  **Clone o repositório:**
+1.  **Clone o repositório para sua máquina:**
     ```bash
-    git clone https://github.com/seu-usuario/pizzaria-demo.git
+    git clone <URL_DO_REPOSITORIO_NO_GITHUB>
     cd pizzaria-demo
     ```
 
@@ -42,14 +42,7 @@ Siga os passos abaixo para rodar o projeto localmente:
 
 A aplicação estará disponível em `http://localhost:3000`.
 
-## Preview da Interface
-
-*(Aqui você pode adicionar um print da tela da aplicação depois de executá-la)*
-
-![image](https://github.com/user-attachments/assets/b8392a83-500b-4b13-a4f6-829d2f664539)
-
-
-## Melhorias Futuras
+## 🔮 Melhorias Futuras
 
 - [ ] Implementar autenticação JWT para proteger as rotas.
 - [ ] Adicionar um editor de ingredientes mais robusto.
