@@ -1,0 +1,777 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Pizza Demo API",
+        "description": "API para gerenciamento de pizzas, ingredientes e cardápio com autenticação JWT.",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080",
+            "description": "Generated server url"
+        }
+    ],
+    "paths": {
+        "/pizza/{id}": {
+            "put": {
+                "tags": [
+                    "pizza-controller"
+                ],
+                "summary": "Atualiza completamente uma pizza",
+                "description": "Atualiza todos os campos de uma pizza identificada pelo ID.",
+                "operationId": "updatePizza",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Pizza"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Pizza atualizada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Pizza"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "pizza-controller"
+                ],
+                "summary": "Remove uma pizza",
+                "description": "Remove uma pizza identificada pelo ID.",
+                "operationId": "deletePizza",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Pizza removida com sucesso"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "pizza-controller"
+                ],
+                "summary": "Atualiza parcialmente uma pizza",
+                "description": "Atualiza apenas os campos informados de uma pizza identificada pelo ID.",
+                "operationId": "updateParcial",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "additionalProperties": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Pizza atualizada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Pizza"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ingredientes/{id}": {
+            "put": {
+                "tags": [
+                    "ingredientes-controller"
+                ],
+                "summary": "Atualiza completamente um ingrediente",
+                "description": "Atualiza todos os campos de um ingrediente identificado pelo ID.",
+                "operationId": "updateIngrediente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Ingredientes"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ingrediente atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Ingredientes"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "ingredientes-controller"
+                ],
+                "summary": "Remove um ingrediente",
+                "description": "Remove um ingrediente identificado pelo ID.",
+                "operationId": "deleteIngrediente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ingrediente removido com sucesso"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "ingredientes-controller"
+                ],
+                "summary": "Atualiza parcialmente um ingrediente",
+                "description": "Atualiza apenas os campos informados de um ingrediente identificado pelo ID.",
+                "operationId": "updateIngredienteParcial",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Ingredientes"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ingrediente atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Ingredientes"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/cardapio/{id}": {
+            "get": {
+                "tags": [
+                    "cardapio-controller"
+                ],
+                "summary": "Busca um item do cardápio pelo ID",
+                "description": "Retorna os detalhes de um item específico do cardápio.",
+                "operationId": "getCardapioById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Item encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cardapio"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "cardapio-controller"
+                ],
+                "summary": "Atualiza completamente um item do cardápio",
+                "description": "Atualiza todos os campos de um item do cardápio identificado pelo ID.",
+                "operationId": "updateCardapio",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cardapio"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Item atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cardapio"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "cardapio-controller"
+                ],
+                "summary": "Remove um item do cardápio",
+                "description": "Remove um item do cardápio identificado pelo ID.",
+                "operationId": "deleteCardapio",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Item removido com sucesso"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "cardapio-controller"
+                ],
+                "summary": "Atualiza parcialmente um item do cardápio",
+                "description": "Atualiza apenas os campos informados de um item do cardápio identificado pelo ID.",
+                "operationId": "updateCardapioParcial",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cardapio"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Item atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cardapio"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pizza": {
+            "get": {
+                "tags": [
+                    "pizza-controller"
+                ],
+                "summary": "Lista todas as pizzas",
+                "description": "Retorna uma lista com todas as pizzas cadastradas.",
+                "operationId": "getAllPizzas",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Pizza"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "pizza-controller"
+                ],
+                "summary": "Cria uma nova pizza",
+                "description": "Recebe um JSON representando uma pizza e a salva no banco de dados.",
+                "operationId": "createPizza",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Pizza"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Pizza criada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Pizza"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pizza/batch": {
+            "post": {
+                "tags": [
+                    "pizza-controller"
+                ],
+                "summary": "Cria múltiplas pizzas",
+                "description": "Recebe uma lista de pizzas em formato JSON e salva todas de uma vez.",
+                "operationId": "inserirMultiplas",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Pizza"
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Pizzas criadas com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Pizza"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ingredientes": {
+            "get": {
+                "tags": [
+                    "ingredientes-controller"
+                ],
+                "summary": "Lista todos os ingredientes",
+                "description": "Retorna uma lista com todos os ingredientes cadastrados.",
+                "operationId": "getAllIngredientes",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Ingredientes"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "ingredientes-controller"
+                ],
+                "summary": "Cria um novo ingrediente",
+                "description": "Recebe um JSON representando um ingrediente e o salva no banco de dados.",
+                "operationId": "createIngrediente",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Ingredientes"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ingrediente criado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Ingredientes"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ingredientes/batch": {
+            "post": {
+                "tags": [
+                    "ingredientes-controller"
+                ],
+                "summary": "Cria múltiplos ingredientes",
+                "description": "Recebe uma lista de ingredientes em formato JSON e salva todos de uma vez.",
+                "operationId": "createMultiplosIngredientes",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Ingredientes"
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ingredientes criados com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Ingredientes"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/cardapio": {
+            "get": {
+                "tags": [
+                    "cardapio-controller"
+                ],
+                "summary": "Lista todos os itens do cardápio",
+                "description": "Retorna uma lista com todos os itens cadastrados no cardápio.",
+                "operationId": "getAllCardapios",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Cardapio"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "cardapio-controller"
+                ],
+                "summary": "Cria um novo item no cardápio",
+                "description": "Recebe um JSON representando um item do cardápio e o salva no banco de dados.",
+                "operationId": "createCardapio",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cardapio"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Item criado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cardapio"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/cardapio/batch": {
+            "post": {
+                "tags": [
+                    "cardapio-controller"
+                ],
+                "summary": "Cria múltiplos itens no cardápio",
+                "description": "Recebe uma lista de itens do cardápio em formato JSON e salva todos de uma vez.",
+                "operationId": "createMultiplosCardapios",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Cardapio"
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Itens criados com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cardapio"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "auth-controller"
+                ],
+                "summary": "Realiza login e retorna um token JWT",
+                "description": "Recebe um JSON com username e password. Se as credenciais estiverem corretas, retorna um token JWT para ser usado nos endpoints protegidos.",
+                "operationId": "login",
+                "requestBody": {
+                    "description": "JSON com username e password",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "string",
+                                "example": {
+                                    "username": "admin",
+                                    "password": "senha123"
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login realizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": {
+                                        "token": "eyJhbGciOiJIUzUxMiJ9..."
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Usuário ou senha inválidos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": {
+                                        "status": 401,
+                                        "error": "Unauthorized",
+                                        "message": "Usuário ou senha inválidos.",
+                                        "path": "/auth/login"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Cardapio": {
+                "required": [
+                    "tamanho",
+                    "valor"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "valor": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "tamanho": {
+                        "type": "string"
+                    },
+                    "pizza": {
+                        "$ref": "#/components/schemas/Pizza"
+                    }
+                }
+            },
+            "Ingredientes": {
+                "required": [
+                    "ingrediente",
+                    "quantidade"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "ingrediente": {
+                        "maxLength": 50,
+                        "minLength": 2,
+                        "type": "string"
+                    },
+                    "quantidade": {
+                        "type": "string"
+                    },
+                    "pizza": {
+                        "$ref": "#/components/schemas/Pizza"
+                    }
+                }
+            },
+            "Pizza": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "ingredientes": {
+                        "uniqueItems": true,
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Ingredientes"
+                        }
+                    },
+                    "cardapio": {
+                        "uniqueItems": true,
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cardapio"
+                        }
+                    },
+                    "sabor": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
